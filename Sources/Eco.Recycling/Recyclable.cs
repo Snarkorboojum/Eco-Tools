@@ -49,7 +49,7 @@ namespace Eco.Recycling
 		/// <param name="recyclableObject">A <see cref="IRecyclable"/> object that is not used and ready for recycling.</param>
 		/// <returns>true if provided object is successfully recycled; otherwise, false.</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Boolean TryFreeIfRecyclable(Object recyclableObject)
+		public static Boolean TryFreeIfRecyclable(this Object recyclableObject)
 		{
 			var recyclableExtended = recyclableObject as IRecyclableExtended;
 			if (recyclableExtended != null)
