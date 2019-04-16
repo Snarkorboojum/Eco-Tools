@@ -51,12 +51,15 @@ namespace Eco.Recycling
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static Boolean TryFreeIfRecyclable(this Object recyclableObject)
 		{
-			var recyclableExtended = recyclableObject as IRecyclableExtended;
-			if (recyclableExtended != null)
+			var recyclable = recyclableObject as IRecyclable;
+
+			if (recyclable == null || recyclable.IsInFactory)
+				return false;
+
+			if (recyclableObject is IRecyclableExtended recyclableExtended)
 				return recyclableExtended.CheckAndFree();
 
-			var recyclable = recyclableObject as IRecyclable;
-			return recyclable != null && recyclable.TryFree();
+			return recyclable.TryFree();
 		}
 
 		/// <summary>
